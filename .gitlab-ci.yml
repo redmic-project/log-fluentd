@@ -82,9 +82,13 @@ deploy-supporting-branch-develop:
     SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
-    COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.dev.yml
+    ES_HOSTS: ${DEV_ES_HOSTS}
+    ES_USER: ${DEV_ES_USER}
+    ES_PASS: ${DEV_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} COMPOSE_FILE=${COMPOSE_FILE}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -102,9 +106,13 @@ deploy-stable-branch-develop:
     SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
-    COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.dev.yml
+    ES_HOSTS: ${DEV_ES_HOSTS}
+    ES_USER: ${DEV_ES_USER}
+    ES_PASS: ${DEV_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} COMPOSE_FILE=${COMPOSE_FILE}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -120,9 +128,13 @@ deploy-supporting-branch-production:
     SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
-    COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.prod.yml
+    ES_HOSTS: ${PRO_ES_HOSTS}
+    ES_USER: ${PRO_ES_USER}
+    ES_PASS: ${PRO_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} COMPOSE_FILE=${COMPOSE_FILE}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:
@@ -140,9 +152,13 @@ deploy-stable-branch-production:
     SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
-    COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.prod.yml
+    ES_HOSTS: ${PRO_ES_HOSTS}
+    ES_USER: ${PRO_ES_USER}
+    ES_PASS: ${PRO_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} COMPOSE_FILE=${COMPOSE_FILE}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:

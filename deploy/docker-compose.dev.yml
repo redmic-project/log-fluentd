@@ -1,5 +1,0 @@
-version: '3.5'
-
-configs:
-  fluent-conf:
-    file: ./conf/fluent-dev.conf
