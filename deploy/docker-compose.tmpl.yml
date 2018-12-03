@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  fluentd:
+    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
+    networks:
+      log-net:
+        aliases:
+          - fluentd
+      elastic-net:
+    configs:
+      - source: fluent-conf
+        target: /fluentd/etc/fluent.conf
+    logging:
+      driver: json-file
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        delay: 10s
+        window: 1m
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          memory: 103M
+
+networks:
+  log-net:
+    name: log-net
+    driver: overlay
+    attachable: true
+
+  elastic-net:
+    external: true
