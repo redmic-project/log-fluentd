@@ -85,11 +85,10 @@ deploy-supporting-branch-develop:
     ES_HOSTS: ${DEV_ES_HOSTS}
     ES_USER: ${DEV_ES_USER}
     ES_PASS: ${DEV_ES_PASS}
-    PUBLIC_HOSTNAME: ${DEV_PUBLIC_HOSTNAME}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS} PUBLIC_HOSTNAME=${PUBLIC_HOSTNAME}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -110,11 +109,10 @@ deploy-stable-branch-develop:
     ES_HOSTS: ${DEV_ES_HOSTS}
     ES_USER: ${DEV_ES_USER}
     ES_PASS: ${DEV_ES_PASS}
-    PUBLIC_HOSTNAME: ${DEV_PUBLIC_HOSTNAME}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS} PUBLIC_HOSTNAME=${PUBLIC_HOSTNAME}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -133,11 +131,10 @@ deploy-supporting-branch-production:
     ES_HOSTS: ${PRO_ES_HOSTS}
     ES_USER: ${PRO_ES_USER}
     ES_PASS: ${PRO_ES_PASS}
-    PUBLIC_HOSTNAME: ${PRO_PUBLIC_HOSTNAME}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS} PUBLIC_HOSTNAME=${PUBLIC_HOSTNAME}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:
@@ -158,11 +155,10 @@ deploy-stable-branch-production:
     ES_HOSTS: ${PRO_ES_HOSTS}
     ES_USER: ${PRO_ES_USER}
     ES_PASS: ${PRO_ES_PASS}
-    PUBLIC_HOSTNAME: ${PRO_PUBLIC_HOSTNAME}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS} PUBLIC_HOSTNAME=${PUBLIC_HOSTNAME}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:
