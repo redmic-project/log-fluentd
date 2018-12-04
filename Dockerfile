@@ -10,8 +10,8 @@ ARG UI_VERSION=1.2.1
 RUN apk add --update --virtual .build-deps \
 	sudo build-base ruby-dev && \
 	sudo gem install \
-		fluent-plugin-elasticsearch --no-document --version ${ES_PLUGIN_VERSION} \
-		fluentd-ui --no-document --version ${UI_VERSION} && \
+		fluent-plugin-elasticsearch:${ES_PLUGIN_VERSION} --no-document  \
+		fluentd-ui:${UI_VERSION} --no-document && \
 	sudo gem sources --clear-all && \
 	apk del .build-deps && \
 	rm -rf \
