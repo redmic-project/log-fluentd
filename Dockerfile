@@ -5,11 +5,13 @@ FROM fluent/fluentd:v${FLUENTD_VERSION}
 LABEL maintainer="info@redmic.es"
 
 ARG ES_PLUGIN_VERSION=2.12.1
+ARG UI_VERSION=1.2.1
 
 RUN apk add --update --virtual .build-deps \
 	sudo build-base ruby-dev && \
 	sudo gem install \
-		fluent-plugin-elasticsearch --no-rdoc --no-ri --version ${ES_PLUGIN_VERSION} && \
+		fluent-plugin-elasticsearch --no-document --version ${ES_PLUGIN_VERSION} \
+		fluentd-ui --no-document --version ${UI_VERSION} && \
 	sudo gem sources --clear-all && \
 	apk del .build-deps && \
 	rm -rf \

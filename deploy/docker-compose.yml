@@ -12,6 +12,7 @@ services:
         aliases:
           - fluentd
       elastic-net:
+      traefik-net:
     secrets:
       - source: fluent-conf
         target: /fluentd/etc/fluent.conf
@@ -20,6 +21,11 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      labels:
+        traefik.docker.network: traefik-net
+        traefik.frontend.rule: "Host:${UI_SUBDOMAIN}.${PUBLIC_HOSTNAME}"
+        traefik.backend: fluentd
+        traefik.port: "9292"
       restart_policy:
         delay: 10s
         window: 1m
@@ -37,6 +43,9 @@ networks:
     attachable: true
 
   elastic-net:
+    external: true
+
+  traefik-net:
     external: true
 
 secrets:
