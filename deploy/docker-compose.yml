@@ -12,7 +12,7 @@ services:
         aliases:
           - fluentd
       elastic-net:
-    secrets:
+    configs:
       - source: fluent-conf
         target: /fluentd/etc/fluent.conf
     logging:
@@ -39,6 +39,6 @@ networks:
   elastic-net:
     external: true
 
-secrets:
+configs:
   fluent-conf:
     file: ./conf/fluent.conf
