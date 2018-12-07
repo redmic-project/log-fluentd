@@ -83,12 +83,8 @@ deploy-supporting-branch-develop:
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${DEV_ES_HOSTS}
-    ES_USER: ${DEV_ES_USER}
-    ES_PASS: ${DEV_ES_PASS}
   script:
-    - >
-      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS}
+    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
   environment:
     name: dev
   only:
@@ -107,12 +103,8 @@ deploy-stable-branch-develop:
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${DEV_ES_HOSTS}
-    ES_USER: ${DEV_ES_USER}
-    ES_PASS: ${DEV_ES_PASS}
   script:
-    - >
-      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS}
+    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
   environment:
     name: dev
   only:
@@ -129,12 +121,8 @@ deploy-supporting-branch-production:
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${PRO_ES_HOSTS}
-    ES_USER: ${PRO_ES_USER}
-    ES_PASS: ${PRO_ES_PASS}
   script:
-    - >
-      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS}
+    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
   environment:
     name: pro
   only:
@@ -153,12 +141,8 @@ deploy-stable-branch-production:
     IMAGE_NAME: ${CI_REGISTRY_IMAGE}
     IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${PRO_ES_HOSTS}
-    ES_USER: ${PRO_ES_USER}
-    ES_PASS: ${PRO_ES_PASS}
   script:
-    - >
-      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS}
+    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
   environment:
     name: pro
   only:
