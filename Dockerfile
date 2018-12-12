@@ -6,12 +6,10 @@ LABEL maintainer="info@redmic.es"
 
 ARG ES_PLUGIN_VERSION=2.12.1
 
-RUN apk add --update --virtual .build-deps \
-	sudo build-base ruby-dev && \
-	sudo gem install \
-		fluent-plugin-elasticsearch --no-rdoc --no-ri --version ${ES_PLUGIN_VERSION} && \
-	sudo gem sources --clear-all && \
-	apk del .build-deps && \
-	rm -rf \
-		/var/cache/apk/* \
-		/home/fluent/.gem/ruby/2.5.0/cache/*.gem
+RUN apk add --update --no-cache --virtual .build-deps \
+		build-base \
+		ruby-dev && \
+	gem install --no-document \
+		fluent-plugin-elasticsearch:${ES_PLUGIN_VERSION} && \
+	gem sources --clear-all && \
+	apk del .build-deps
