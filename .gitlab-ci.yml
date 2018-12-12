@@ -5,6 +5,12 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
+  FLUENTD_VERSION: '1.3'
+  ES_PLUGIN_VERSION: '2.12.1'
+  STACK: log
+  SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
+  IMAGE_NAME: ${CI_REGISTRY_IMAGE}
+  IMAGE_TAG: ${CI_COMMIT_SHA}
 
 services:
   - docker:dind
@@ -12,9 +18,6 @@ services:
 docker-build-commit-non-master-branches:
   stage: package
   image: docker:stable
-  variables:
-    FLUENTD_VERSION: '1.3'
-    ES_PLUGIN_VERSION: '2.12.1'
   only:
     - branches
   except:
@@ -29,9 +32,6 @@ docker-build-commit-non-master-branches:
 docker-build-commit-master-branch:
   stage: package
   image: docker:stable
-  variables:
-    FLUENTD_VERSION: '1.3'
-    ES_PLUGIN_VERSION: '2.12.1'
   only:
     - master
   script:
@@ -43,6 +43,7 @@ docker-build-commit-master-branch:
 
 docker-tag-already-built-image:
   stage: package
+  image: docker:stable
   only:
     - tags
   script:
@@ -78,10 +79,6 @@ deploy-supporting-branch-develop:
   image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
-    STACK: log
-    SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
-    IMAGE_NAME: ${CI_REGISTRY_IMAGE}
-    IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${DEV_ES_HOSTS}
   script:
     - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
@@ -98,10 +95,6 @@ deploy-stable-branch-develop:
   image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
-    STACK: log
-    SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
-    IMAGE_NAME: ${CI_REGISTRY_IMAGE}
-    IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${DEV_ES_HOSTS}
   script:
     - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
@@ -116,10 +109,6 @@ deploy-supporting-branch-production:
   image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
-    STACK: log
-    SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
-    IMAGE_NAME: ${CI_REGISTRY_IMAGE}
-    IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${PRO_ES_HOSTS}
   script:
     - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
@@ -136,10 +125,6 @@ deploy-stable-branch-production:
   image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
-    STACK: log
-    SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
-    IMAGE_NAME: ${CI_REGISTRY_IMAGE}
-    IMAGE_TAG: ${CI_COMMIT_SHA}
     ES_HOSTS: ${PRO_ES_HOSTS}
   script:
     - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}

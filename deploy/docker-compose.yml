@@ -9,7 +9,7 @@ services:
       log-net:
         aliases:
           - fluentd
-      elastic6-net:
+      elastic-net:
     configs:
       - source: fluent-conf
         target: /fluentd/etc/fluent.conf
@@ -26,17 +26,19 @@ services:
           cpus: '1'
           memory: 128M
         reservations:
-          memory: 103M
+          memory: 64M
 
 networks:
   log-net:
-    name: log-net
+    name: ${LOG_NET_NAME:-log-net}
     driver: overlay
-    attachable: true
+    attachable: ${LOG_NET_ATTACHABLE:-true}
 
-  elastic6-net:
+  elastic-net:
+    name: ${ELASTIC_NET_NAME:-elastic6-net}
     external: true
 
 configs:
   fluent-conf:
+    name: ${FLUENT_CONF_NAME:-fluent-conf}
     file: ./conf/fluent.conf
