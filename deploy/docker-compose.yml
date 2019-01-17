@@ -5,6 +5,8 @@ services:
     image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
     environment:
       - ES_HOSTS
+      - ES_USER
+      - ES_PASS
     networks:
       log-net:
         aliases:
