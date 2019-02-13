@@ -80,8 +80,12 @@ deploy-supporting-branch-develop:
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
     ES_HOSTS: ${DEV_ES_HOSTS}
+    ES_USER: ${DEV_ES_USER}
+    ES_PASS: ${DEV_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -96,8 +100,12 @@ deploy-stable-branch-develop:
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
     ES_HOSTS: ${DEV_ES_HOSTS}
+    ES_USER: ${DEV_ES_USER}
+    ES_PASS: ${DEV_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: dev
   only:
@@ -110,8 +118,12 @@ deploy-supporting-branch-production:
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
     ES_HOSTS: ${PRO_ES_HOSTS}
+    ES_USER: ${PRO_ES_USER}
+    ES_PASS: ${PRO_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:
@@ -126,8 +138,12 @@ deploy-stable-branch-production:
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
     ES_HOSTS: ${PRO_ES_HOSTS}
+    ES_USER: ${PRO_ES_USER}
+    ES_PASS: ${PRO_ES_PASS}
   script:
-    - deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS}
+    - >
+      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
+      ES_PASS=${ES_PASS}
   environment:
     name: pro
   only:
