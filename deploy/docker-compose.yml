@@ -8,10 +8,8 @@ services:
       - ES_USER
       - ES_PASS
     networks:
-      log-net:
-        aliases:
-          - fluentd
-      elastic-net:
+      - log-net
+      - elastic-net
     configs:
       - source: fluent-conf
         target: /fluentd/etc/fluent.conf
