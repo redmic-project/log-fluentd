@@ -6,7 +6,7 @@ stages:
 variables:
   DOCKER_DRIVER: overlay2
   FLUENTD_VERSION: '1.3'
-  ES_PLUGIN_VERSION: '2.12.1'
+  ES_PLUGIN_VERSION: '3.4.0'
   STACK: log
   SERVICES_TO_CHECK: log_${CI_PROJECT_NAME}
   IMAGE_NAME: ${CI_REGISTRY_IMAGE}
@@ -76,12 +76,9 @@ container-scanning:
 
 deploy-supporting-branch-develop:
   stage: deploy
-  image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
+  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
-    ES_HOSTS: ${DEV_ES_HOSTS}
-    ES_USER: ${DEV_ES_USER}
-    ES_PASS: ${DEV_ES_PASS}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
@@ -96,12 +93,9 @@ deploy-supporting-branch-develop:
 
 deploy-stable-branch-develop:
   stage: deploy
-  image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
+  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
-    ES_HOSTS: ${DEV_ES_HOSTS}
-    ES_USER: ${DEV_ES_USER}
-    ES_PASS: ${DEV_ES_PASS}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
@@ -114,12 +108,9 @@ deploy-stable-branch-develop:
 
 deploy-supporting-branch-production:
   stage: deploy
-  image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
+  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
-    ES_HOSTS: ${PRO_ES_HOSTS}
-    ES_USER: ${PRO_ES_USER}
-    ES_PASS: ${PRO_ES_PASS}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
@@ -134,12 +125,9 @@ deploy-supporting-branch-production:
 
 deploy-stable-branch-production:
   stage: deploy
-  image: registry.gitlab.com/redmic-project/docker/docker-deploy:latest
+  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
-    ES_HOSTS: ${PRO_ES_HOSTS}
-    ES_USER: ${PRO_ES_USER}
-    ES_PASS: ${PRO_ES_PASS}
   script:
     - >
       deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
