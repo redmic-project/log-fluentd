@@ -4,7 +4,7 @@ FROM fluent/fluentd:v${FLUENTD_VERSION}
 
 LABEL maintainer="info@redmic.es"
 
-ARG ES_PLUGIN_VERSION=2.12.1
+ARG ES_PLUGIN_VERSION=3.4.0
 
 RUN apk add --update --no-cache --virtual .build-deps \
 		build-base \
