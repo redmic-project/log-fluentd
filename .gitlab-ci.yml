@@ -1,15 +1,21 @@
 include:
   - project: 'redmic-project/gitlab-ci-templates'
     ref: master
+    file: '/packaging.yml'
+  - project: 'redmic-project/gitlab-ci-templates'
+    ref: master
     file: '/deployment.yml'
 
 stages:
+  - package
+  - test-package
   - deploy
 
 variables:
+  FLUENTD_VERSION: '1.3'
+  ES_PLUGIN_VERSION: '3.5.0'
+  DOCKER_BUILD_ARGS: --build-arg FLUENTD_VERSION=${FLUENTD_VERSION} --build-arg ES_PLUGIN_VERSION=${ES_PLUGIN_VERSION}
   STACK: log
-  IMAGE_NAME: fluent/fluentd
-  IMAGE_TAG: v1.3
 
 .deploy:
   script:

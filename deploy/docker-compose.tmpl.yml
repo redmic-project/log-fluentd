@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   fluentd:
-    image: ${IMAGE_NAME:-fluent/fluentd}:${IMAGE_TAG:-v1.3}
+    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
     environment:
       LOG_LEVEL:
       ES_HOSTS:
