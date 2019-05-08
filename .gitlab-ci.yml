@@ -10,7 +10,6 @@ variables:
   STACK: log
   IMAGE_NAME: fluent/fluentd
   IMAGE_TAG: v1.3
-  COMPOSE_FILE: docker-compose.yml
 
 .deploy:
   script:
