@@ -2,12 +2,12 @@ version: '3.5'
 
 services:
   fluentd:
-    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME:-fluent/fluentd}:${IMAGE_TAG:-v1.3}
     environment:
-      - LOG_LEVEL
-      - ES_HOSTS
-      - ES_USER
-      - ES_PASS
+      LOG_LEVEL:
+      ES_HOSTS:
+      ES_USER:
+      ES_PASS:
     networks:
       - log-net
       - elastic-net
