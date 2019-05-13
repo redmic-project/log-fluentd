@@ -4,9 +4,10 @@ FROM fluent/fluentd:v${FLUENTD_VERSION}
 
 LABEL maintainer="info@redmic.es"
 
-ARG ES_PLUGIN_VERSION=3.4.0
+ARG ES_PLUGIN_VERSION=3.5.0
 
-RUN apk add --update --no-cache --virtual .build-deps \
+RUN apk add --update --no-cache \
+		--virtual .build-deps \
 		build-base \
 		ruby-dev && \
 	gem install --no-document \

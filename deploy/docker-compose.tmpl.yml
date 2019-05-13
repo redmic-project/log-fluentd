@@ -4,10 +4,10 @@ services:
   fluentd:
     image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
     environment:
-      - LOG_LEVEL
-      - ES_HOSTS
-      - ES_USER
-      - ES_PASS
+      LOG_LEVEL:
+      ES_HOSTS:
+      ES_USER:
+      ES_PASS:
     networks:
       - log-net
       - elastic-net
