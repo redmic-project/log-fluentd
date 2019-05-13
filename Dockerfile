@@ -8,8 +8,8 @@ ARG ES_PLUGIN_VERSION=3.5.0
 
 RUN apk add --update --no-cache \
 		--virtual .build-deps \
-		build-base \
-		ruby-dev && \
+		build-base=0.5-r1 \
+		ruby-dev=2.5.5-r0 && \
 	gem install --no-document \
 		fluent-plugin-elasticsearch:${ES_PLUGIN_VERSION} && \
 	gem sources --clear-all && \
