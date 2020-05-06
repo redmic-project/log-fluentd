@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   fluentd:
-    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME:-registry.gitlab.com/redmic-project/log/fluentd}:${IMAGE_TAG:-latest}
     environment:
       LOG_LEVEL:
       ES_HOSTS:
@@ -18,26 +18,26 @@ services:
       driver: json-file
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: ${REPLICAS:-1}
       restart_policy:
-        delay: 10s
-        window: 1m
+        delay: ${RESTART_DELAY:-10s}
       resources:
         limits:
-          cpus: '1'
-          memory: 256M
+          cpus: '${RESOURCES_LIMITS_CPUS:-1}'
+          memory: ${RESOURCES_LIMITS_MEMORY:-256M}
         reservations:
-          cpus: '0.1'
-          memory: 128M
+          cpus: '${RESOURCES_RESERVATIONS_CPUS:-0.1}'
+          memory: ${RESOURCES_RESERVATIONS_MEMORY:-128M}
 
 networks:
   log-net:
     name: ${LOG_NET_NAME:-log-net}
-    driver: overlay
+    driver: ${LOG_NET_DRIVER:-overlay}
     attachable: ${LOG_NET_ATTACHABLE:-true}
 
   elastic-net:
     name: ${ELASTIC_NET_NAME:-elastic6-net}
+    driver: ${ELASTIC_NET_DRIVER:-overlay}
     external: true
 
 configs:
