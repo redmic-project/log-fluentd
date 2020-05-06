@@ -3,14 +3,20 @@ version: '3.5'
 services:
   fluentd:
     image: ${IMAGE_NAME:-registry.gitlab.com/redmic-project/log/fluentd}:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ${DOCKERFILE:-Dockerfile}
+      args:
+        FLUENTD_VERSION:
+        ES_PLUGIN_VERSION:
     environment:
       LOG_LEVEL:
       ES_HOSTS:
       ES_USER:
       ES_PASS:
     networks:
-      - log-net
-      - elastic-net
+      log-net:
+      elastic-net:
     configs:
       - source: fluent-conf
         target: /fluentd/etc/fluent.conf
