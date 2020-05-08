@@ -5,6 +5,9 @@ include:
   - project: 'redmic-project/gitlab-ci-templates'
     ref: master
     file: '/deployment.yml'
+  - project: 'redmic-project/gitlab-ci-templates'
+    ref: master
+    file: '/deployment-custom-image.yml'
 
 stages:
   - package
@@ -12,13 +15,9 @@ stages:
   - deploy
 
 variables:
-  FLUENTD_VERSION: '1.3'
-  ES_PLUGIN_VERSION: '3.5.0'
-  DOCKER_BUILD_ARGS: --build-arg FLUENTD_VERSION=${FLUENTD_VERSION} --build-arg ES_PLUGIN_VERSION=${ES_PLUGIN_VERSION}
-  STACK: log
+  PROJECT_PARENT_NAME: log
 
 .deploy:
-  script:
-    - >
-      deploy.sh IMAGE_NAME=${IMAGE_NAME} IMAGE_TAG=${IMAGE_TAG} ES_HOSTS=${ES_HOSTS} ES_USER=${ES_USER}
-      ES_PASS=${ES_PASS}
+  variables:
+    STACK: ${PROJECT_PARENT_NAME}
+    SERVICES_TO_CHECK: ${PROJECT_PARENT_NAME}_${CI_PROJECT_NAME}
