@@ -9,6 +9,8 @@ services:
       args:
         FLUENTD_VERSION:
         ES_PLUGIN_VERSION:
+        BUILD_BASE_VERSION:
+        RUBY_DEV_VERSION:
     environment:
       LOG_LEVEL:
       ES_HOSTS:
@@ -26,7 +28,9 @@ services:
       mode: replicated
       replicas: ${REPLICAS:-1}
       restart_policy:
-        delay: ${RESTART_DELAY:-10s}
+        delay: ${RESTART_DELAY:-5s}
+      update_config:
+        delay: ${UPDATE_DELAY:-1m}
       resources:
         limits:
           cpus: '${RESOURCES_LIMITS_CPUS:-1}'
